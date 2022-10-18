@@ -13,6 +13,7 @@ if (proxy && proxy[proxy.length - 1] != "/") proxy = proxy + "/";
 let result = [];
 
 function search(text: string, e: e_type[]) {
+    document.body.classList.add("show_result");
     for (let i of e) {
         switch (i) {
             case "baidu":
@@ -130,6 +131,13 @@ function r() {
     }
 }
 
+const search_el = document.getElementById("search") as HTMLInputElement;
+
 if (text) {
+    search_el.value = text;
     search(text, e);
 }
+
+search_el.onchange = () => {
+    search(search_el.value, e);
+};

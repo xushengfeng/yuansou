@@ -15,6 +15,18 @@
     -webkit-user-drag: none;
 }
 
+body {
+    @apply flex flex-col;
+}
+
+body > div:nth-child(1) {
+    @apply h-screen sticky top-0;
+}
+
+.show_result > div:nth-child(1) {
+    @apply h-12;
+}
+
 #result > div {
     width: 60vw;
 }
