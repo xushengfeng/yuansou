@@ -31,8 +31,25 @@ function search(text: string, e: e_type[]) {
     }
 }
 
+function page(n: number, e: e_type) {
+    switch (e) {
+        case "baidu":
+            return `&pn=${n}0`;
+        case "bing":
+            let num = 0;
+            if (n == 1) {
+                num == 1;
+            } else {
+                num = (n - 2) * 10 + 6;
+            }
+            return `&first=${num}`;
+    }
+}
+
+var page_n = 1;
+
 function baidu(text: string) {
-    fetch(`${proxy}https://www.baidu.com/s?ie=UTF-8&wd=${encodeURIComponent(text)}`)
+    fetch(`${proxy}https://www.baidu.com/s?ie=UTF-8&wd=${encodeURIComponent(text)}${page(page_n, "baidu")}`)
         .then((v) => v.text())
         .then(async (v) => {
             let tmp_div = document.createElement("div");
@@ -65,7 +82,7 @@ function baidu(text: string) {
 }
 
 function bing(text: string) {
-    fetch(`${proxy}https://cn.bing.com/search?q=${encodeURIComponent(text)}`)
+    fetch(`${proxy}https://cn.bing.com/search?q=${encodeURIComponent(text)}${page(page_n, "bing")}`)
         .then((v) => v.text())
         .then(async (v) => {
             let tmp_div = document.createElement("div");
@@ -94,7 +111,7 @@ function bing(text: string) {
 }
 
 function google(text: string) {
-    fetch(`${proxy}https://www.google.com/search?q=${encodeURIComponent(text)}`)
+    fetch(`${proxy}https://www.google.com/search?q=${encodeURIComponent(text)}${page(page_n, "google")}`)
         .then((v) => v.text())
         .then(async (v) => {
             let tmp_div = document.createElement("div");
